@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import md5 from 'crypto-js/md5';
 import { setPlayerToken } from '../store/actions';
 
 class Login extends Component {
@@ -41,10 +42,19 @@ class Login extends Component {
     );
   };
 
+  fetchGravatar = (user) => {
+    const { email, name } = user;
+    const id = md5(email).toString();
+    const picture = `https://www.gravatar.com/avatar/${id}`;
+    const ranking = JSON.stringify([{ name, score: 0, picture }]);
+    localStorage.setItem('ranking', ranking);
+  };
+
   handlePlayButton = () => {
     const { dispatchUser, history } = this.props;
     const { user } = this.state;
     dispatchUser(user);
+    this.fetchGravatar(user);
     history.push('/game');
   };
 
