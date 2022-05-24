@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { setPlayerToken } from '../store/actions';
 
 class Login extends Component {
   state = {
-    user: { email: '', nome: '' },
+    user: { email: '', name: '' },
     isEnterButtonDisabled: true,
   };
 
@@ -15,9 +16,9 @@ class Login extends Component {
 
   validateUserInfo = () => {
     const { user } = this.state;
-    const { email, nome } = user;
+    const { email, name } = user;
     const MAX_LENGTH = 3;
-    const errorCases = [!this.validateEmail(email), nome.length < MAX_LENGTH];
+    const errorCases = [!this.validateEmail(email), name.length < MAX_LENGTH];
     const attrAreOk = errorCases.every((error) => error === false);
     this.setState({
       isEnterButtonDisabled: !attrAreOk,
@@ -39,10 +40,16 @@ class Login extends Component {
     );
   };
 
+  handlePlayButton = () => {
+    const { dispatchUser, history } = this.props;
+    const { user } = this.state;
+    dispatchUser(user);
+    history.push('/game');
+  };
+
   render() {
     const { user, isEnterButtonDisabled } = this.state;
-    const { history } = this.props;
-    const { email, nome } = user;
+    const { email, name } = user;
     return (
       <div className="Login">
         <h3 className="text-center">Login</h3>
@@ -58,8 +65,8 @@ class Login extends Component {
           <input
             data-testid="input-player-name"
             type="text"
-            name="nome"
-            value={ nome }
+            name="name"
+            value={ name }
             onChange={ this.onInputChange }
             placeholder="Digite seu nome"
           />
@@ -69,7 +76,7 @@ class Login extends Component {
             data-testid="btn-play"
             type="submit"
             disabled={ isEnterButtonDisabled }
-            onClick={ () => history.push('/game') }
+            onClick={ this.handlePlayButton }
           >
             Play
           </button>
@@ -81,7 +88,11 @@ class Login extends Component {
 
 Login.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
-  // dispatchEmail: propTypes.func.isRequired,
+  dispatchUser: PropTypes.func.isRequired,
 };
 
-export default connect()(Login);
+const mapDispatchToProps = (dispatch) => ({
+  dispatchUser: (user) => dispatch(setPlayerToken(user)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
