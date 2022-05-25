@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import "./Game.css";
+import './Game.css';
 
 class Game extends Component {
   state = {
@@ -117,7 +117,7 @@ class Game extends Component {
         <div data-testid="answer-options">
           {answers.map((answer, i) => (answer === correct ? (
             <button
-              className={colorQuestions ? "correct" : "" }
+              className={ colorQuestions ? 'correct' : '' }
               type="button"
               data-testid="correct-answer"
               key={ i }
@@ -127,7 +127,7 @@ class Game extends Component {
             </button>
           ) : (
             <button
-              className={colorQuestions ? "wrong" : "" }
+              className={ colorQuestions ? 'wrong' : '' }
               type="button"
               key={ i }
               data-testid={ `wrong-answer-${counterAnswersWrong()}` }
