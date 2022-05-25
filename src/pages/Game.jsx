@@ -22,7 +22,7 @@ class Game extends Component {
     const tokenInvalid = 3;
     if (responseCode === tokenInvalid) {
       localStorage.removeItem('token');
-      history.push('/login');
+      history.push('/');
     } else {
       this.setState(
         {
