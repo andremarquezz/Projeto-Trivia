@@ -35,8 +35,11 @@ class Game extends Component {
 
   handleAnswer = () => {
     const { currentQuestion } = this.state;
+    const forceOrderRandom = 0.5;
     const { correct_answer: correct, incorrect_answers: incorrect } = currentQuestion;
-    const sortAnswers = [...incorrect, correct].sort();
+    const sortAnswers = [...incorrect, correct].sort(
+      () => Math.random() - forceOrderRandom,
+    );
     this.setState({
       answers: sortAnswers,
     });
@@ -74,7 +77,7 @@ class Game extends Component {
   };
 
   fetchQuestions = async () => {
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
     const API = `https://opentdb.com/api.php?amount=5&token=${token}`;
     const data = await (await fetch(API)).json();
     this.validateToken(data);

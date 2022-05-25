@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
-import { setPlayerToken } from '../store/actions';
+import { playerAction } from '../store/actions';
 
 class Login extends Component {
   state = {
@@ -42,7 +42,8 @@ class Login extends Component {
     );
   };
 
-  fetchGravatar = (user) => {
+  fetchGravatar = () => {
+    const { user } = this.state;
     const { email, name } = user;
     const id = md5(email).toString();
     const picture = `https://www.gravatar.com/avatar/${id}`;
@@ -50,11 +51,19 @@ class Login extends Component {
     localStorage.setItem('ranking', ranking);
   };
 
-  handlePlayButton = () => {
-    const { dispatchUser, history } = this.props;
+  setPlayerToken = async () => {
+    const API = 'https://opentdb.com/api_token.php?command=request';
+    const data = await (await fetch(API)).json();
+    const { token } = data;
+    localStorage.setItem('token', token);
+  };
+
+  handlePlayButton = async () => {
     const { user } = this.state;
+    const { dispatchUser, history } = this.props;
+    await this.setPlayerToken();
+    this.fetchGravatar();
     dispatchUser(user);
-    this.fetchGravatar(user);
     history.push('/game');
   };
 
@@ -108,7 +117,7 @@ Login.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchUser: (user) => dispatch(setPlayerToken(user)),
+  dispatchUser: (user) => dispatch(playerAction(user)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
