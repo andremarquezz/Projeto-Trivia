@@ -134,20 +134,28 @@ class Game extends Component {
 
   nextQuestion = () => {
     const { counter } = this.state;
+    const counterQuestions = 5;
     const { history } = this.props;
-    const maxQuestions = 4;
-    if (counter < maxQuestions) {
+    if (counter < counterQuestions) {
       this.intervalTimer();
       this.setState(
         (prevState) => ({
           counter: prevState.counter + 1,
         }),
-        () => this.currentQuestion(),
+        () => {
+          const { counter } = this.state;
+          console.log(counter);
+          if (counter === 5) {
+            history.push('/feedback');
+          }
+          this.currentQuestion();
+        },
       );
-      if (counter === maxQuestions - 1) {
-        history.push('/feedback');
-      }
     }
+    // const maxQuestions = 4;
+    // if (counter === maxQuestions) {
+    //   history.push('/feedback');
+    // }
   };
 
   fetchQuestions = async () => {
