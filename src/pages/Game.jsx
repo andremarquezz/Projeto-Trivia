@@ -10,7 +10,6 @@ class Game extends Component {
     counter: 0,
     answers: [],
     score: 0,
-    counterAnswersWrong: 0,
     btnNextQuestion: false,
   };
 
@@ -93,19 +92,17 @@ class Game extends Component {
     this.validateToken(data);
   };
 
-  // Não esta sendo chamada
-  counterAnswersWrong = () => {
-    const maxWrongs = 3;
-    const { counterAnswersWrong } = this.state;
-    if (counterAnswersWrong < maxWrongs) {
-      this.setState((prevState) => ({
-        counterAnswersWrong: prevState.counterAnswersWrong + 1,
-      }));
-    }
-  };
-
   render() {
-    const { currentQuestion, answers, counterAnswersWrong, btnNextQuestion } = this.state;
+    const initialCounter = -1;
+    let counterWrong = initialCounter;
+    const counterAnswersWrong = () => {
+      const maxWrongs = 3;
+      if (counterWrong < maxWrongs) {
+        counterWrong += 1;
+      }
+      return counterWrong;
+    };
+    const { currentQuestion, answers, btnNextQuestion } = this.state;
     const { category, question } = currentQuestion;
     const { correct_answer: correct } = currentQuestion;
     return (
@@ -127,7 +124,7 @@ class Game extends Component {
             <button
               type="button"
               key={ i }
-              data-testid={ `wrong-answer-${counterAnswersWrong}` }
+              data-testid={ `wrong-answer-${counterAnswersWrong()}` }
               onClick={ this.verifyAnswer }
             >
               {answer}
