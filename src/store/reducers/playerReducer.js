@@ -1,4 +1,4 @@
-import { SET_PLAYER } from '../actions';
+import { SET_PLAYER, SET_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -12,8 +12,13 @@ const playerReducer = (state = INITIAL_STATE, action) => {
   case SET_PLAYER:
     return {
       ...state,
-      name: action.name,
-      gravatarEmail: action.email,
+      name: action.userInfo.name,
+      gravatarEmail: action.userInfo.email,
+    };
+  case SET_SCORE:
+    return {
+      ...state,
+      score: action.score,
     };
   default:
     return state;

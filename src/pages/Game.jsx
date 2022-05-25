@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import './Game.css';
+import { scoreAction } from '../store/actions';
 
 class Game extends Component {
   state = {
@@ -16,6 +17,7 @@ class Game extends Component {
     timer: 30,
     btnDisabled: false,
     enableTimer: true,
+    totalScore: 0,
   };
 
   componentDidMount() {
@@ -78,6 +80,7 @@ class Game extends Component {
         colorQuestions: false,
         btnDisabled: false,
         enableTimer: true,
+        timer: 30,
       },
       () => this.handleAnswer(),
     );
@@ -85,19 +88,48 @@ class Game extends Component {
 
   verifyAnswer = ({ target }) => {
     const userAnswer = target.innerHTML;
-    const { currentQuestion } = this.state;
-    const { correct_answer: correct } = currentQuestion;
+    const { currentQuestion, timer } = this.state;
+    const correctPoint = 10;
+    const { correct_answer: correct, difficulty } = currentQuestion;
+    clearInterval(this.timer);
     if (userAnswer === correct) {
-      this.setState(({ score }) => ({
-        score: score + 1,
-      }));
+      this.setState(
+        ({ score, totalScore }) => ({
+          score: score + 1,
+          totalScore: totalScore + timer * this.difficulty(difficulty) + correctPoint,
+        }),
+        () => {
+          const { totalScore } = this.state;
+          const { setScore } = this.props;
+          setScore(totalScore);
+          this.scoreLocalStorage(totalScore);
+        },
+      );
     }
-
     this.setState({
       btnNextQuestion: true,
       colorQuestions: true,
       btnDisabled: false,
     });
+  };
+
+  scoreLocalStorage = (totalScore) => {
+    const ranking = JSON.parse(localStorage.getItem('ranking'))[0];
+    const score = JSON.stringify([{ ...ranking, score: totalScore }]);
+    localStorage.setItem('ranking', score);
+  };
+
+  difficulty = (difficulty) => {
+    const pointHard = 3;
+    if (difficulty === 'easy') {
+      return 1;
+    }
+    if (difficulty === 'medium') {
+      return 2;
+    }
+    if (difficulty === 'hard') {
+      return pointHard;
+    }
   };
 
   nextQuestion = () => {
@@ -155,7 +187,6 @@ class Game extends Component {
     } = this.state;
     const { category, question } = currentQuestion;
     const { correct_answer: correct } = currentQuestion;
-    console.log(timer);
     return (
       <>
         <Header />
@@ -198,5 +229,10 @@ class Game extends Component {
 }
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  setScore: PropTypes.func.isRequired,
 };
-export default connect()(Game);
+
+const mapDispatchToProps = (dispatch) => ({
+  setScore: (score) => dispatch(scoreAction(score)),
+});
+export default connect(null, mapDispatchToProps)(Game);

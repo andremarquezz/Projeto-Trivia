@@ -64,6 +64,7 @@ class Login extends Component {
     await this.setPlayerToken();
     this.fetchGravatar();
     dispatchUser(user);
+    console.log(user);
     history.push('/game');
   };
 
