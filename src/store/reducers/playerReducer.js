@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   assertions: 0,
   score: 0,
   gravatarEmail: '',
+  token: 0,
 };
 
 const playerReducer = (state = INITIAL_STATE, action) => {
