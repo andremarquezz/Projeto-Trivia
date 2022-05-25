@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import "./Game.css";
 
 class Game extends Component {
   state = {
@@ -11,6 +12,7 @@ class Game extends Component {
     answers: [],
     score: 0,
     btnNextQuestion: false,
+    colorQuestions: false,
   };
 
   componentDidMount() {
@@ -52,6 +54,7 @@ class Game extends Component {
       {
         currentQuestion: results[counter],
         btnNextQuestion: false,
+        colorQuestions: false,
       },
       () => this.handleAnswer(),
     );
@@ -69,6 +72,7 @@ class Game extends Component {
 
     this.setState({
       btnNextQuestion: true,
+      colorQuestions: true,
     });
   };
 
@@ -102,7 +106,7 @@ class Game extends Component {
       }
       return counterWrong;
     };
-    const { currentQuestion, answers, btnNextQuestion } = this.state;
+    const { currentQuestion, answers, btnNextQuestion, colorQuestions } = this.state;
     const { category, question } = currentQuestion;
     const { correct_answer: correct } = currentQuestion;
     return (
@@ -113,6 +117,7 @@ class Game extends Component {
         <div data-testid="answer-options">
           {answers.map((answer, i) => (answer === correct ? (
             <button
+              className={colorQuestions ? "correct" : "" }
               type="button"
               data-testid="correct-answer"
               key={ i }
@@ -122,6 +127,7 @@ class Game extends Component {
             </button>
           ) : (
             <button
+              className={colorQuestions ? "wrong" : "" }
               type="button"
               key={ i }
               data-testid={ `wrong-answer-${counterAnswersWrong()}` }
