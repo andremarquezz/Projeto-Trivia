@@ -5,7 +5,6 @@ const INITIAL_STATE = {
   assertions: 0,
   score: 0,
   gravatarEmail: '',
-  token: 0,
 };
 
 const playerReducer = (state = INITIAL_STATE, action) => {
@@ -13,9 +12,8 @@ const playerReducer = (state = INITIAL_STATE, action) => {
   case SET_PLAYER:
     return {
       ...state,
-      name: action.userInfo.user.name,
-      gravatarEmail: action.userInfo.user.email,
-      token: action.userInfo.token,
+      name: action.name,
+      gravatarEmail: action.email,
     };
   default:
     return state;
