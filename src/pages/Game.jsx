@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import "./Game.css";
+import './Game.css';
 
 class Game extends Component {
   state = {
@@ -13,11 +13,32 @@ class Game extends Component {
     score: 0,
     btnNextQuestion: false,
     colorQuestions: false,
+    timer: 30,
+    btnDisabled: false,
+    enableTimer: true,
   };
 
   componentDidMount() {
     this.fetchQuestions();
+    this.intervalTimer();
   }
+
+  componentDidUpdate() {
+    const { timer } = this.state;
+    if (timer === 0) {
+      clearInterval(this.timer);
+      this.handleTimer();
+    }
+  }
+
+  intervalTimer = () => {
+    const ONE_SECOND = 1000;
+    this.timer = setInterval(() => {
+      this.setState((prevState) => ({
+        timer: prevState.timer - 1,
+      }));
+    }, ONE_SECOND);
+  };
 
   validateToken = (data) => {
     const { response_code: responseCode, results } = data;
@@ -55,6 +76,8 @@ class Game extends Component {
         currentQuestion: results[counter],
         btnNextQuestion: false,
         colorQuestions: false,
+        btnDisabled: false,
+        enableTimer: true,
       },
       () => this.handleAnswer(),
     );
@@ -73,19 +96,25 @@ class Game extends Component {
     this.setState({
       btnNextQuestion: true,
       colorQuestions: true,
+      btnDisabled: false,
     });
   };
 
   nextQuestion = () => {
     const { counter } = this.state;
+    const { history } = this.props;
     const maxQuestions = 4;
     if (counter < maxQuestions) {
+      this.intervalTimer();
       this.setState(
         (prevState) => ({
           counter: prevState.counter + 1,
         }),
         () => this.currentQuestion(),
       );
+      if (counter === maxQuestions - 1) {
+        history.push('/feedback');
+      }
     }
   };
 
@@ -94,6 +123,15 @@ class Game extends Component {
     const API = `https://opentdb.com/api.php?amount=5&token=${token}`;
     const data = await (await fetch(API)).json();
     this.validateToken(data);
+  };
+
+  handleTimer = () => {
+    this.setState({
+      timer: 30,
+      btnDisabled: true,
+      btnNextQuestion: true,
+      enableTimer: false,
+    });
   };
 
   render() {
@@ -106,18 +144,29 @@ class Game extends Component {
       }
       return counterWrong;
     };
-    const { currentQuestion, answers, btnNextQuestion, colorQuestions } = this.state;
+    const {
+      currentQuestion,
+      answers,
+      btnNextQuestion,
+      colorQuestions,
+      timer,
+      btnDisabled,
+      enableTimer,
+    } = this.state;
     const { category, question } = currentQuestion;
     const { correct_answer: correct } = currentQuestion;
+    console.log(timer);
     return (
       <>
         <Header />
         <p data-testid="question-category">{category}</p>
         <p data-testid="question-text">{question}</p>
+        {enableTimer ? <span>{`${timer} segundos`}</span> : <span>Acabou o tempo!</span>}
         <div data-testid="answer-options">
           {answers.map((answer, i) => (answer === correct ? (
             <button
-              className={colorQuestions ? "correct" : "" }
+              disabled={ btnDisabled }
+              className={ colorQuestions ? 'correct' : '' }
               type="button"
               data-testid="correct-answer"
               key={ i }
@@ -127,8 +176,9 @@ class Game extends Component {
             </button>
           ) : (
             <button
-              className={colorQuestions ? "wrong" : "" }
+              className={ colorQuestions ? 'wrong' : '' }
               type="button"
+              disabled={ btnDisabled }
               key={ i }
               data-testid={ `wrong-answer-${counterAnswersWrong()}` }
               onClick={ this.verifyAnswer }
