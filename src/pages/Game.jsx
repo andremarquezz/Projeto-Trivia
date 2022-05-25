@@ -10,6 +10,8 @@ class Game extends Component {
     counter: 0,
     answers: [],
     score: 0,
+    counterAnswersWrong: 0,
+    btnNextQuestion: false,
   };
 
   componentDidMount() {
@@ -50,6 +52,7 @@ class Game extends Component {
     this.setState(
       {
         currentQuestion: results[counter],
+        btnNextQuestion: false,
       },
       () => this.handleAnswer(),
     );
@@ -57,16 +60,23 @@ class Game extends Component {
 
   verifyAnswer = ({ target }) => {
     const userAnswer = target.innerHTML;
-    const maxQuestions = 4;
-    const { currentQuestion, counter } = this.state;
+    const { currentQuestion } = this.state;
     const { correct_answer: correct } = currentQuestion;
     if (userAnswer === correct) {
       this.setState(({ score }) => ({
         score: score + 1,
       }));
     }
+
+    this.setState({
+      btnNextQuestion: true,
+    });
+  };
+
+  nextQuestion = () => {
+    const { counter } = this.state;
+    const maxQuestions = 4;
     if (counter < maxQuestions) {
-      console.log(counter);
       this.setState(
         (prevState) => ({
           counter: prevState.counter + 1,
@@ -83,14 +93,19 @@ class Game extends Component {
     this.validateToken(data);
   };
 
+  // Não esta sendo chamada
+  counterAnswersWrong = () => {
+    const maxWrongs = 3;
+    const { counterAnswersWrong } = this.state;
+    if (counterAnswersWrong < maxWrongs) {
+      this.setState((prevState) => ({
+        counterAnswersWrong: prevState.counterAnswersWrong + 1,
+      }));
+    }
+  };
+
   render() {
-    const initialNumber = -1;
-    let counter = initialNumber;
-    const counterAnswerWrong = () => {
-      counter += 1;
-      return counter;
-    };
-    const { currentQuestion, answers } = this.state;
+    const { currentQuestion, answers, counterAnswersWrong, btnNextQuestion } = this.state;
     const { category, question } = currentQuestion;
     const { correct_answer: correct } = currentQuestion;
     return (
@@ -112,12 +127,17 @@ class Game extends Component {
             <button
               type="button"
               key={ i }
-              data-testid={ `wrong-answer-${counterAnswerWrong()}` }
+              data-testid={ `wrong-answer-${counterAnswersWrong}` }
               onClick={ this.verifyAnswer }
             >
               {answer}
             </button>
           )))}
+          {btnNextQuestion && (
+            <button type="button" data-testid="btn-next" onClick={ this.nextQuestion }>
+              Next
+            </button>
+          )}
         </div>
       </>
     );
