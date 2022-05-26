@@ -6,7 +6,6 @@ import Header from '../components/Header';
 class Feedback extends Component {
   handleFeedback = () => {
     const { assertions } = this.props;
-    console.log(assertions);
     const threeAssertions = 3;
     return assertions >= threeAssertions;
   };
@@ -25,6 +24,7 @@ class Feedback extends Component {
         )}
 
         <p data-testid="feedback-total-score">{score}</p>
+        <p data-testid="feedback-total-question">{assertions}</p>
       </>
     );
   }
