@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import './Game.css';
-import { scoreAction } from '../store/actions';
+import { scoreAction, assertionsAction } from '../store/actions';
 
 class Game extends Component {
   state = {
@@ -11,13 +11,13 @@ class Game extends Component {
     currentQuestion: {},
     counter: 0,
     answers: [],
-    score: 0,
+    assertions: 0,
     btnNextQuestion: false,
     colorQuestions: false,
     timer: 30,
     btnDisabled: false,
     enableTimer: true,
-    totalScore: 0,
+    score: 0,
   };
 
   componentDidMount() {
@@ -89,20 +89,21 @@ class Game extends Component {
   verifyAnswer = ({ target }) => {
     const userAnswer = target.innerHTML;
     const { currentQuestion, timer } = this.state;
-    const correctPoint = 10;
+    const fixPoint = 10;
     const { correct_answer: correct, difficulty } = currentQuestion;
     clearInterval(this.timer);
     if (userAnswer === correct) {
       this.setState(
-        ({ score, totalScore }) => ({
-          score: score + 1,
-          totalScore: totalScore + timer * this.difficulty(difficulty) + correctPoint,
+        ({ assertions, score }) => ({
+          assertions: assertions + 1,
+          score: score + timer * this.difficulty(difficulty) + fixPoint,
         }),
         () => {
-          const { totalScore } = this.state;
-          const { setScore } = this.props;
-          setScore(totalScore);
-          this.scoreLocalStorage(totalScore);
+          const { score, assertions } = this.state;
+          const { setScore, setAssertions } = this.props;
+          setScore(score);
+          setAssertions(assertions);
+          this.scoreLocalStorage(score);
         },
       );
     }
@@ -113,10 +114,10 @@ class Game extends Component {
     });
   };
 
-  scoreLocalStorage = (totalScore) => {
+  scoreLocalStorage = (score) => {
     const ranking = JSON.parse(localStorage.getItem('ranking'))[0];
-    const score = JSON.stringify([{ ...ranking, score: totalScore }]);
-    localStorage.setItem('ranking', score);
+    const totalScore = JSON.stringify([{ ...ranking, score }]);
+    localStorage.setItem('ranking', totalScore);
   };
 
   difficulty = (difficulty) => {
@@ -233,9 +234,11 @@ class Game extends Component {
 Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   setScore: PropTypes.func.isRequired,
+  setAssertions: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   setScore: (score) => dispatch(scoreAction(score)),
+  setAssertions: (assertions) => dispatch(assertionsAction(assertions)),
 });
 export default connect(null, mapDispatchToProps)(Game);

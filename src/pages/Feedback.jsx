@@ -1,32 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Header from '../components/Header';
 
 class Feedback extends Component {
+  state = {
+    positiveFeedback: false,
+  };
+
+  handleFeedback = () => {
+    const { assertions } = this.props;
+    const threeAssertions = 3;
+    if (assertions >= threeAssertions) {
+      this.setState({
+        positiveFeedback: true,
+      });
+    } else {
+      this.setState({
+        positiveFeedback: false,
+      });
+    }
+  };
+
   render() {
     const { score } = this.props;
-    const userInfo = JSON.parse(localStorage.getItem('ranking'))[0];
+    const { positiveFeedback } = this.state;
     return (
-      <header>
-        <h1 data-testid="feedback-text">Feedback</h1>
-        <img
-          src={ userInfo.picture }
-          alt="imageGravatar"
-          data-testid="header-profile-picture"
-        />
-        <h2 data-testid="header-player-name">{userInfo.name}</h2>
-        <span data-testid="header-score">{score}</span>
-        <Link to="/settings">
-          <button type="button">Settings</button>
-        </Link>
-      </header>
+      <>
+        <Header />
+        <div>
+          <h1>Feedback</h1>
+          {positiveFeedback ? (
+            <p data-testid="feedback-text">Well Done!</p>
+          ) : (
+            <p data-testid="feedback-text">Could be better...</p>
+          )}
+        </div>
+        <div>
+          <p data-testid="feedback-total-question">{score}</p>
+        </div>
+      </>
     );
   }
 }
 
 Feedback.propTypes = {
   score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
