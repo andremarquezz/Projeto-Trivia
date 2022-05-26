@@ -47,8 +47,9 @@ class Login extends Component {
     const { email, name } = user;
     const id = md5(email).toString();
     const picture = `https://www.gravatar.com/avatar/${id}`;
-    const ranking = JSON.stringify([{ name, score: 0, picture }]);
-    localStorage.setItem('ranking', ranking);
+    const ranking = JSON.parse(localStorage.getItem('ranking')) || [];
+    const newRanking = JSON.stringify([{ name, score: 0, picture }, ...ranking]);
+    localStorage.setItem('ranking', newRanking);
   };
 
   setPlayerToken = async () => {

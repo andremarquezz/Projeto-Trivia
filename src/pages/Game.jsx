@@ -50,12 +50,7 @@ class Game extends Component {
       localStorage.removeItem('token');
       history.push('/');
     } else {
-      this.setState(
-        {
-          results,
-        },
-        () => this.currentQuestion(),
-      );
+      this.setState({ results }, () => this.currentQuestion());
     }
   };
 
@@ -115,9 +110,12 @@ class Game extends Component {
   };
 
   scoreLocalStorage = (score) => {
-    const ranking = JSON.parse(localStorage.getItem('ranking'))[0];
-    const totalScore = JSON.stringify([{ ...ranking, score }]);
-    localStorage.setItem('ranking', totalScore);
+    const { namePlayer } = this.props;
+    const allPlayers = JSON.parse(localStorage.getItem('ranking'));
+    const player = allPlayers.find((user) => user.name === namePlayer);
+    player.score = score;
+    allPlayers[0] = player;
+    localStorage.setItem('ranking', JSON.stringify(allPlayers));
   };
 
   difficulty = (difficulty) => {
@@ -235,10 +233,14 @@ Game.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   setScore: PropTypes.func.isRequired,
   setAssertions: PropTypes.func.isRequired,
+  namePlayer: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   setScore: (score) => dispatch(scoreAction(score)),
   setAssertions: (assertions) => dispatch(assertionsAction(assertions)),
 });
-export default connect(null, mapDispatchToProps)(Game);
+const mapStateToProps = (state) => ({
+  namePlayer: state.player.name,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
