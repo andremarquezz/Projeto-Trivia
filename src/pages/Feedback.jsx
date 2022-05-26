@@ -4,41 +4,27 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 class Feedback extends Component {
-  state = {
-    positiveFeedback: false,
-  };
-
   handleFeedback = () => {
     const { assertions } = this.props;
+    console.log(assertions);
     const threeAssertions = 3;
-    if (assertions >= threeAssertions) {
-      this.setState({
-        positiveFeedback: true,
-      });
-    } else {
-      this.setState({
-        positiveFeedback: false,
-      });
-    }
+    return assertions >= threeAssertions;
   };
 
   render() {
     const { score } = this.props;
-    const { positiveFeedback } = this.state;
     return (
       <>
         <Header />
-        <div>
-          <h1>Feedback</h1>
-          {positiveFeedback ? (
-            <p data-testid="feedback-text">Well Done!</p>
-          ) : (
-            <p data-testid="feedback-text">Could be better...</p>
-          )}
-        </div>
-        <div>
-          <p data-testid="feedback-total-question">{score}</p>
-        </div>
+
+        <h1>Feedback</h1>
+        {this.handleFeedback() ? (
+          <p data-testid="feedback-text">Well Done!</p>
+        ) : (
+          <p data-testid="feedback-text">Could be better...</p>
+        )}
+
+        <p data-testid="feedback-total-score">{score}</p>
       </>
     );
   }
@@ -51,6 +37,7 @@ Feedback.propTypes = {
 
 const mapStateToProps = (state) => ({
   score: state.player.score,
+  assertions: state.player.assertions,
 });
 
 export default connect(mapStateToProps)(Feedback);
