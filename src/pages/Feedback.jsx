@@ -9,7 +9,7 @@ class Feedback extends Component {
     const userInfo = JSON.parse(localStorage.getItem('ranking'))[0];
     return (
       <header>
-        <h1>Feedback</h1>
+        <h1 data-testid="feedback-text">Feedback</h1>
         <img
           src={ userInfo.picture }
           alt="imageGravatar"
