@@ -11,7 +11,7 @@ class Feedback extends Component {
   };
 
   render() {
-    const { score, assertions } = this.props;
+    const { score, assertions, history } = this.props;
     return (
       <>
         <Header />
@@ -23,6 +23,20 @@ class Feedback extends Component {
         )}
         <p data-testid="feedback-total-score">{score}</p>
         <p data-testid="feedback-total-question">{assertions}</p>
+        <button
+          data-testid="btn-play-again"
+          type="button"
+          onClick={ () => history.push('/') }
+        >
+          Play Again
+        </button>
+        <button
+          data-testid="btn-ranking"
+          type="button"
+          onClick={ () => history.push('/ranking') }
+        >
+          Ranking
+        </button>
       </>
     );
   }
@@ -31,6 +45,7 @@ class Feedback extends Component {
 Feedback.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
