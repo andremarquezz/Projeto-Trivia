@@ -11,18 +11,16 @@ class Feedback extends Component {
   };
 
   render() {
-    const { score } = this.props;
+    const { score, assertions } = this.props;
     return (
       <>
         <Header />
-
         <h1>Feedback</h1>
         {this.handleFeedback() ? (
           <p data-testid="feedback-text">Well Done!</p>
         ) : (
           <p data-testid="feedback-text">Could be better...</p>
         )}
-
         <p data-testid="feedback-total-score">{score}</p>
         <p data-testid="feedback-total-question">{assertions}</p>
       </>
