@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 class Feedback extends Component {
   state = {
-    positiveFeedback: false,
+    positiveFeedback: true,
   };
 
   handleFeedback = () => {
@@ -13,11 +13,11 @@ class Feedback extends Component {
     const threeAssertions = 3;
     if (assertions >= threeAssertions) {
       this.setState({
-        positiveFeedback: true,
+        positiveFeedback: false,
       });
     } else {
       this.setState({
-        positiveFeedback: false,
+        positiveFeedback: true,
       });
     }
   };
@@ -31,13 +31,13 @@ class Feedback extends Component {
         <div>
           <h1>Feedback</h1>
           {positiveFeedback ? (
-            <p data-testid="feedback-text">Well Done!</p>
-          ) : (
             <p data-testid="feedback-text">Could be better...</p>
+          ) : (
+            <p data-testid="feedback-text">Well Done!</p>
           )}
         </div>
         <div>
-          <p data-testid="feedback-total-question">{score}</p>
+          <p data-testid="feedback-total-score">{score}</p>
         </div>
       </>
     );
