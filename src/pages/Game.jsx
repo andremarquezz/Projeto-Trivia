@@ -50,7 +50,12 @@ class Game extends Component {
       localStorage.removeItem('token');
       history.push('/');
     } else {
-      this.setState({ results }, () => this.currentQuestion());
+      this.setState(
+        {
+          results,
+        },
+        () => this.currentQuestion(),
+      );
     }
   };
 
@@ -120,15 +125,9 @@ class Game extends Component {
 
   difficulty = (difficulty) => {
     const pointHard = 3;
-    if (difficulty === 'easy') {
-      return 1;
-    }
-    if (difficulty === 'medium') {
-      return 2;
-    }
-    if (difficulty === 'hard') {
-      return pointHard;
-    }
+    if (difficulty === 'easy') return 1;
+    if (difficulty === 'medium') return 2;
+    if (difficulty === 'hard') return pointHard;
   };
 
   nextQuestion = () => {
