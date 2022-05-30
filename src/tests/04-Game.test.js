@@ -1,32 +1,16 @@
 import React from 'react';
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import {
+  fireEvent,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
-
+import result_API from './helpers/results_api';
 describe('Testa funcionalidade da tela Game', () => {
-  const result_API = {
-    response_code: 0,
-    results: [
-      {
-        category: 'Entertainment: Video Games',
-        type: 'boolean',
-        difficulty: 'hard',
-        question:
-          'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
-        correct_answer: 'False',
-        incorrect_answers: ['True'],
-      },
-      {
-        category: 'Entertainment: Video Games',
-        type: 'multiple',
-        difficulty: 'easy',
-        question: 'What is the first weapon you acquire in Half-Life?',
-        correct_answer: 'A crowbar',
-        incorrect_answers: ['A pistol', 'The H.E.V suit', 'Your fists'],
-      },
-    ],
-  };
+  jest.setTimeout(35000);
   jest.spyOn(global, 'fetch');
   global.fetch.mockResolvedValue({
     json: jest.fn().mockResolvedValue(result_API),
@@ -79,19 +63,34 @@ describe('Testa funcionalidade da tela Game', () => {
     );
     expect(nextAnswer).toBeInTheDocument();
   });
-  it('Testa se contém o texto acabou o tempo após 30s', () => {
+  it('Testa se contém o texto acabou o tempo após 30s', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
     history.push('/game');
-    const timer = screen.getByText(/segundos/i);
-    expect(timer).toBeInTheDocument();
-    setTimeout(() => {
-      const newText = screen.getByText(/acabou o tempo/i);
-      expect(newText).toBeInTheDocument();
-    }, 30000);
+    const text = await screen.findByText(/Acabou o tempo!/i, {}, { timeout: 31000 });
+    expect(text).toBeInTheDocument();
   });
-  it('Testa se HandleTime é chamada', () => {
-    const { history } = renderWithRouterAndRedux(<App />);
-    history.push('/game');
-    // expect(handleTimer).toBeCalled();
-  });
+  // it('Testa se o state timer foi alterado', () => {
+  //   const { history } = renderWithRouterAndRedux(<App />);
+  //   handleTimer = jest.fn()
+  //   history.push('/game');
+  //   expect(handleTimer).toBeCalled();
+  // });
+  // it('Testa se não tiver o token retorna para pagina de login', () => {
+  //   const { history } = renderWithRouterAndRedux(<App />);
+  //   localStorage.removeItem('token')
+  //   history.push('/game');
+  // expect(handleTimer).toBeCalled();
+  // });
+  //  it('Testa se é levado para pagina de feedback após 5 perguntas', () => {
+  //    const { history } = renderWithRouterAndRedux(<App />);
+  //    history.push('/game');
+
+  //    await waitFor(() => {
+  //     const correctAnswer = screen.getByTestId('correct-answer');
+  //     userEvent.click(correctAnswer);
+  //   });
+  //   const btnNext = screen.getByRole('button', { name: /Next/i });
+  //   expect(btnNext).toBeInTheDocument();
+  //   userEvent.click(btnNext);
+  //  });
 });
