@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 
 class Feedback extends Component {
   handleFeedback = () => {
@@ -14,7 +14,7 @@ class Feedback extends Component {
     const { score, assertions, history } = this.props;
     return (
       <>
-        {/* <Header /> */}
+        <Header />
         <h1>Feedback</h1>
         {this.handleFeedback() ? (
           <p data-testid="feedback-text">Well Done!</p>
