@@ -4,7 +4,7 @@ import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
 
-describe('Testa funsionalidade da tela login', () => {
+describe('Testa funcionalidade da tela login', () => {
   beforeEach(()=>renderWithRouterAndRedux(<App />));
   it('Testa se a página de login está na rota /', () => {
 
@@ -28,7 +28,7 @@ describe('Testa funsionalidade da tela login', () => {
     expect(button2).toBeInTheDocument();
   })
 
-  it('Verifica se a rota e auterada para /game ao clicar no Play', async () =>{
+  it('Verifica se a rota e alterada para /game ao clicar no Play', async () =>{
 
 
     const inputEmail = screen.getByTestId('input-gravatar-email');
