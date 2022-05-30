@@ -64,28 +64,23 @@ describe('Testa funcionalidade da tela Game', () => {
     const text = await screen.findByText(/Acabou o tempo!/i, {}, { timeout: 31000 });
     expect(text).toBeInTheDocument();
   });
-  // it('Testa se o state timer foi alterado', () => {
-  //   const { history } = renderWithRouterAndRedux(<App />);
-  //   handleTimer = jest.fn()
-  //   history.push('/game');
-  //   expect(handleTimer).toBeCalled();
-  // });
-  // it('Testa se não tiver o token retorna para pagina de login', () => {
-  //   const { history } = renderWithRouterAndRedux(<App />);
-  //   localStorage.removeItem('token')
-  //   history.push('/game');
-  // expect(handleTimer).toBeCalled();
-  // });
-  //  it('Testa se é levado para pagina de feedback após 5 perguntas', () => {
-  //    const { history } = renderWithRouterAndRedux(<App />);
-  //    history.push('/game');
 
-  //    await waitFor(() => {
-  //     const correctAnswer = screen.getByTestId('correct-answer');
-  //     userEvent.click(correctAnswer);
-  //   });
-  //   const btnNext = screen.getByRole('button', { name: /Next/i });
-  //   expect(btnNext).toBeInTheDocument();
-  //   userEvent.click(btnNext);
-  //  });
+  it('Testa se não tiver o token retorna para pagina de login', async () => {
+    jest.resetAllMocks();
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue({
+        response_code: 3,
+        results: [],
+      }),
+    });
+    const { history } = renderWithRouterAndRedux(<App />);
+    localStorage.removeItem('token');
+    const storage = localStorage.getItem('token');
+    expect(storage).toBeNull();
+    // history.push('/game');
+    // const { pathname } = history.location;
+    // await waitFor(expect(pathname).toBe('/', {}, { timeout: 5000 }));
+    // screen.debug();
+  });
 });
