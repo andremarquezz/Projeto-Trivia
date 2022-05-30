@@ -47,5 +47,4 @@ describe('Testa funcionalidade da tela Feedback', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/ranking');
   });
-  // it('', () => {});
 });
