@@ -1,12 +1,41 @@
 import React from 'react';
-import { screen, fireEvent } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
 
 describe('Testa funcionalidade da tela Game', () => {
-  const users = [{ name: 'player1', picture: 'picplayer1' }];
+  const result_API = {
+    response_code: 0,
+    results: [
+      {
+        category: 'Entertainment: Video Games',
+        type: 'boolean',
+        difficulty: 'hard',
+        question:
+          'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
+        correct_answer: 'False',
+        incorrect_answers: ['True'],
+      },
+      {
+        category: 'Entertainment: Video Games',
+        type: 'multiple',
+        difficulty: 'easy',
+        question: 'What is the first weapon you acquire in Half-Life?',
+        correct_answer: 'A crowbar',
+        incorrect_answers: ['A pistol', 'The H.E.V suit', 'Your fists'],
+      },
+    ],
+  };
+  jest.spyOn(global, 'fetch');
+  global.fetch.mockResolvedValue({
+    json: jest.fn().mockResolvedValue(result_API),
+  });
+
+  const users = [{ name: 'player1', picture: 'picplayer1', score: 0 }];
+  const token = 'dd93a309c02d4b44b5146d969775992520e0f3dfa56a3cd27a04e3e27e677b49';
   localStorage.setItem('ranking', JSON.stringify(users));
+  localStorage.setItem('token', token);
 
   it('Testa se ao carregar a página a rota é Game', () => {
     const { history } = renderWithRouterAndRedux(<App />);
@@ -14,19 +43,39 @@ describe('Testa funcionalidade da tela Game', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/Game');
   });
-  it('Testa se existe os botões de resposta correta e incorreta', () => {
+  it('Testa se existe os botões de resposta correta e incorreta', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
     history.push('/Game');
-    const correctAnswer = screen.getByTestId('correct-answer');
-    const wrongAnswer = screen.getByTestId('wrong-answer-0');
-
-    expect(correctAnswer).tobeInTheDocument();
-    expect(wrongAnswer).tobeInTheDocument();
+    await waitFor(() => expect(screen.getByTestId('correct-answer')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(/wrong-answer/i)).toBeInTheDocument());
   });
-  it.skip('Testa o botão de proxima pergunta', () => {
-    const { history } = renderWithRouterAndRedux(<App />);
-    history.push('/Game');
-    const btnNext = screen.findByTestId('btn-next');
-    expect(btnNext).tobeInTheDocument();
+  it('Testa o botão de proxima pergunta',  async () => {
+    renderWithRouterAndRedux(<App />);
+    localStorage.removeItem('ranking')
+    localStorage.removeItem('token');
+     const inputEmail = screen.getByTestId('input-gravatar-email');
+     const inputname = screen.getByTestId('input-player-name');
+     const email = 'test@test.com';
+     const name = 'player1';
+
+     userEvent.type(inputEmail, email);
+
+     userEvent.type(inputname, name);
+
+     const button1 = screen.getByTestId('btn-play');
+     expect(button1).toBeInTheDocument();
+
+    userEvent.click(screen.getByTestId('btn-play'));
+    
+    await waitFor(() => {
+      const correctAnswer = screen.getByTestId('correct-answer')
+      userEvent.click(correctAnswer);
+    });
+    const btnNext = screen.getByRole('button', { name: /Next/i });
+    expect(btnNext).toBeInTheDocument();
+    userEvent.click(btnNext);
+    const nextAnswer = screen.getByText(/What is the first weapon you acquire in Half-Life/i);
+    expect(nextAnswer).toBeInTheDocument();
+
   });
 });
