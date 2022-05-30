@@ -24,9 +24,16 @@ describe('Testa funcionalidade da tela de Ranking', () => {
     history.push('/Ranking');
     const buttonHome = screen.getByRole('button', { name: /home/i });
     expect(buttonHome).toBeInTheDocument();
-    userEvent.click(buttonHome)
+    userEvent.click(buttonHome);
     const { pathname } = history.location;
     expect(pathname).toBe('/');
-
-  })
+  });
+  it('Verifica se caso não tenha player retorna array vazio', () => {
+    localStorage.clear()
+    const initialState = {
+      players: JSON.parse(localStorage.getItem('ranking')) || [],
+    };
+    renderWithRouterAndRedux(<App />, initialState, '/ranking');
+    expect(initialState.players).toHaveLength(0);
+  });
 });
