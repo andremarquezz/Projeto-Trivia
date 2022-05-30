@@ -242,4 +242,5 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   namePlayer: state.player.name,
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

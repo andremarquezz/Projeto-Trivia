@@ -49,33 +49,49 @@ describe('Testa funcionalidade da tela Game', () => {
     await waitFor(() => expect(screen.getByTestId('correct-answer')).toBeInTheDocument());
     await waitFor(() => expect(screen.getByTestId(/wrong-answer/i)).toBeInTheDocument());
   });
-  it('Testa o botão de proxima pergunta',  async () => {
+  it('Testa o botão de proxima pergunta', async () => {
     renderWithRouterAndRedux(<App />);
-    localStorage.removeItem('ranking')
+    localStorage.removeItem('ranking');
     localStorage.removeItem('token');
-     const inputEmail = screen.getByTestId('input-gravatar-email');
-     const inputname = screen.getByTestId('input-player-name');
-     const email = 'test@test.com';
-     const name = 'player1';
+    const inputEmail = screen.getByTestId('input-gravatar-email');
+    const inputname = screen.getByTestId('input-player-name');
+    const email = 'test@test.com';
+    const name = 'player1';
 
-     userEvent.type(inputEmail, email);
+    userEvent.type(inputEmail, email);
 
-     userEvent.type(inputname, name);
+    userEvent.type(inputname, name);
 
-     const button1 = screen.getByTestId('btn-play');
-     expect(button1).toBeInTheDocument();
+    const button1 = screen.getByTestId('btn-play');
+    expect(button1).toBeInTheDocument();
 
     userEvent.click(screen.getByTestId('btn-play'));
-    
+
     await waitFor(() => {
-      const correctAnswer = screen.getByTestId('correct-answer')
+      const correctAnswer = screen.getByTestId('correct-answer');
       userEvent.click(correctAnswer);
     });
     const btnNext = screen.getByRole('button', { name: /Next/i });
     expect(btnNext).toBeInTheDocument();
     userEvent.click(btnNext);
-    const nextAnswer = screen.getByText(/What is the first weapon you acquire in Half-Life/i);
+    const nextAnswer = screen.getByText(
+      /What is the first weapon you acquire in Half-Life/i
+    );
     expect(nextAnswer).toBeInTheDocument();
-
+  });
+  it('Testa se contém o texto acabou o tempo após 30s', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    history.push('/game');
+    const timer = screen.getByText(/segundos/i);
+    expect(timer).toBeInTheDocument();
+    setTimeout(() => {
+      const newText = screen.getByText(/acabou o tempo/i);
+      expect(newText).toBeInTheDocument();
+    }, 30000);
+  });
+  it('Testa se HandleTime é chamada', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    history.push('/game');
+    // expect(handleTimer).toBeCalled();
   });
 });
