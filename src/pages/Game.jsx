@@ -50,12 +50,7 @@ class Game extends Component {
       localStorage.removeItem('token');
       history.push('/');
     } else {
-      this.setState(
-        {
-          results,
-        },
-        () => this.currentQuestion(),
-      );
+      this.setState({ results }, () => this.currentQuestion());
     }
   };
 

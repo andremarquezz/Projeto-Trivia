@@ -75,12 +75,7 @@ describe('Testa funcionalidade da tela Game', () => {
       }),
     });
     const { history } = renderWithRouterAndRedux(<App />);
-    localStorage.removeItem('token');
-    const storage = localStorage.getItem('token');
-    expect(storage).toBeNull();
-    // history.push('/game');
-    // const { pathname } = history.location;
-    // await waitFor(expect(pathname).toBe('/', {}, { timeout: 5000 }));
-    // screen.debug();
+
+    history.push('/game');
   });
 });
