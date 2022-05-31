@@ -136,8 +136,8 @@ class Game extends Component {
     const counterQuestions = 5;
     const maxQuestions = 4;
     const { history } = this.props;
-    if (counter < counterQuestions) {
-      this.intervalTimer();
+    const max = (counter < counterQuestions) && (
+      this.intervalTimer(),
       this.setState(
         (prevState) => ({
           counter: prevState.counter + 1,
@@ -149,8 +149,9 @@ class Game extends Component {
             this.currentQuestion();
           }
         },
-      );
-    }
+      )
+    );
+    return max;
   };
 
   fetchQuestions = async () => {
