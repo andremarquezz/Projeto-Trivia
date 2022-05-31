@@ -37,7 +37,7 @@ const result_API = {
     {
       category: 'Entertainment: Video Games',
       type: 'multiple',
-      difficulty: 'easy',
+      difficulty: 'medium',
       question: 'What is the first weapon you acquire in Half-Life?',
       correct_answer: 'A crowbar',
       incorrect_answers: ['A pistol', 'The H.E.V suit', 'Your fists'],

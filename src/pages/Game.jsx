@@ -87,7 +87,7 @@ class Game extends Component {
     const fixPoint = 10;
     const { correct_answer: correct, difficulty } = currentQuestion;
     clearInterval(this.timer);
-    if (userAnswer === correct) {
+    const test = (userAnswer === correct) && (
       this.setState(
         ({ assertions, score }) => ({
           assertions: assertions + 1,
@@ -100,13 +100,14 @@ class Game extends Component {
           setAssertions(assertions);
           this.scoreLocalStorage(score);
         },
-      );
-    }
+      )
+    );
     this.setState({
       btnNextQuestion: true,
       colorQuestions: true,
       btnDisabled: false,
     });
+    return test;
   };
 
   scoreLocalStorage = (score) => {
@@ -120,9 +121,14 @@ class Game extends Component {
 
   difficulty = (difficulty) => {
     const pointHard = 3;
-    if (difficulty === 'easy') return 1;
-    if (difficulty === 'medium') return 2;
-    if (difficulty === 'hard') return pointHard;
+    switch (difficulty) {
+    case 'easy':
+      return 1;
+    case 'medium':
+      return 2;
+    default:
+      return pointHard;
+    }
   };
 
   nextQuestion = () => {
@@ -168,10 +174,8 @@ class Game extends Component {
     let counterWrong = initialCounter;
     const counterAnswersWrong = () => {
       const maxWrongs = 3;
-      if (counterWrong < maxWrongs) {
-        counterWrong += 1;
-      }
-      return counterWrong;
+      const result = (counterWrong < maxWrongs) && (counterWrong += 1);
+      return result;
     };
     const {
       currentQuestion,
