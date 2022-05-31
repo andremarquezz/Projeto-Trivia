@@ -75,7 +75,7 @@ class Login extends Component {
     const { email, name } = user;
     return (
       <div className="container">
-        <img alt="logoGameTrivia" src={trivia} className="logoTrivia" />
+        <img alt="logoGameTrivia" src={trivia} className="loginLogoTrivia" />
 
         <section className="container ">
           <input
