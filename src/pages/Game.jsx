@@ -203,7 +203,7 @@ class Game extends Component {
             <span>Acabou o tempo!</span>
           )}
 
-          <div data-testid="answer-options" className="answer-options">
+          <div className="answer-options">
             {answers.map((answer, i) =>
               answer === correct ? (
                 <button
@@ -232,7 +232,6 @@ class Game extends Component {
             {btnNextQuestion && (
               <button
                 type="button"
-                data-testid="btn-next"
                 onClick={this.nextQuestion}
                 className="btn btn-secondary"
               >

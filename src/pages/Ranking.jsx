@@ -19,8 +19,8 @@ class Ranking extends Component {
       .sort((a, b) => b.score - a.score)
       .map(({ name, score }, i) => (
         <div key={i}>
-          <p data-testid={`player-name-${i}`}>Nome : {name}</p>
-          <p data-testid={`player-score-${i}`}>Pontos: {score}</p>
+          <p>Nome : {name}</p>
+          <p>Pontos: {score}</p>
           <hr />
         </div>
       ));
@@ -32,7 +32,6 @@ class Ranking extends Component {
       <>
         <div>
           <button
-            data-testid="btn-go-home"
             type="button"
             onClick={() => history.push('/')}
             className="btn btn-primary"
@@ -40,7 +39,6 @@ class Ranking extends Component {
             Home
           </button>
           <button
-            data-testid="btn-go-home"
             type="button"
             onClick={() => history.push('/feedback')}
             className="btn btn-primary"
@@ -48,11 +46,11 @@ class Ranking extends Component {
             Feedback
           </button>
         </div>
-        <div class="fade"></div>
+        <div className="fade"></div>
         <section className="slide">
           <div className="crawl">
             <div className="title">
-              <h1 data-testid="ranking-title ">Ranking</h1>
+              <h1>Ranking</h1>
             </div>
             {this.handleRanking()}
           </div>

@@ -18,15 +18,10 @@ class Feedback extends Component {
         <Header />
         <div className="containerBody">
           <h1>Feedback</h1>
-          {this.handleFeedback() ? (
-            <p data-testid="feedback-text">Well Done!</p>
-          ) : (
-            <p data-testid="feedback-text">Could be better...</p>
-          )}
-          <p data-testid="feedback-total-score">Pontos: {score} </p>
-          <p data-testid="feedback-total-question">Acertos: {assertions}</p>
+          {this.handleFeedback() ? <p>Well Done!</p> : <p>Could be better...</p>}
+          <p>Pontos: {score} </p>
+          <p>Acertos: {assertions}</p>
           <button
-            data-testid="btn-play-again"
             className="btn btn-primary"
             type="button"
             onClick={() => history.push('/')}
@@ -34,8 +29,7 @@ class Feedback extends Component {
             Play Again
           </button>
           <button
-            className="btn btn-primary"
-            data-testid="btn-ranking"
+            className="btn btn-info"
             type="button"
             onClick={() => history.push('/ranking')}
           >

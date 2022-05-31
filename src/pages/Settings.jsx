@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class Settings extends Component {
   render() {
-    return <h1 data-testid="settings-title">Settings</h1>;
+    return <h1>Settings</h1>;
   }
 }
 export default connect()(Settings);
