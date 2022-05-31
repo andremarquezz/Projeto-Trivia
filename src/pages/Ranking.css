@@ -14,7 +14,7 @@ body {
   z-index: 1;
 }
 
-.star-wars {
+.slide {
   display: flex;
   justify-content: center;
   position: relative;

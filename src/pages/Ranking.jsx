@@ -35,12 +35,21 @@ class Ranking extends Component {
             data-testid="btn-go-home"
             type="button"
             onClick={() => history.push('/')}
+            className="btn btn-primary"
           >
             Home
           </button>
+          <button
+            data-testid="btn-go-home"
+            type="button"
+            onClick={() => history.push('/feedback')}
+            className="btn btn-primary"
+          >
+            Feedback
+          </button>
         </div>
         <div class="fade"></div>
-        <section className="star-wars">
+        <section className="slide">
           <div className="crawl">
             <div className="title">
               <h1 data-testid="ranking-title ">Ranking</h1>
@@ -48,7 +57,6 @@ class Ranking extends Component {
             {this.handleRanking()}
           </div>
         </section>
-        <Header />
       </>
     );
   }
