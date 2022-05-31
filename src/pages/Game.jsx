@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import './Game.css';
 import { scoreAction, assertionsAction } from '../store/actions';
+import he from 'he';
 
 class Game extends Component {
   state = {
@@ -59,7 +60,7 @@ class Game extends Component {
     const forceOrderRandom = 0.5;
     const { correct_answer: correct, incorrect_answers: incorrect } = currentQuestion;
     const sortAnswers = [...incorrect, correct].sort(
-      () => Math.random() - forceOrderRandom,
+      () => Math.random() - forceOrderRandom
     );
     this.setState({
       answers: sortAnswers,
@@ -77,7 +78,7 @@ class Game extends Component {
         enableTimer: true,
         timer: 30,
       },
-      () => this.handleAnswer(),
+      () => this.handleAnswer()
     );
   };
 
@@ -87,7 +88,8 @@ class Game extends Component {
     const fixPoint = 10;
     const { correct_answer: correct, difficulty } = currentQuestion;
     clearInterval(this.timer);
-    const test = (userAnswer === correct) && (
+    const test =
+      userAnswer === correct &&
       this.setState(
         ({ assertions, score }) => ({
           assertions: assertions + 1,
@@ -99,9 +101,8 @@ class Game extends Component {
           setScore(score);
           setAssertions(assertions);
           this.scoreLocalStorage(score);
-        },
-      )
-    );
+        }
+      );
     this.setState({
       btnNextQuestion: true,
       colorQuestions: true,
@@ -122,12 +123,14 @@ class Game extends Component {
   difficulty = (difficulty) => {
     const pointHard = 3;
     switch (difficulty) {
-    case 'easy':
-      return 1;
-    case 'medium':
-      return 2;
-    default:
-      return pointHard;
+      case 'easy':
+        return 1;
+      case 'medium':
+        return 2;
+      case 'hard':
+        return pointHard;
+      default:
+        return 0;
     }
   };
 
@@ -136,8 +139,9 @@ class Game extends Component {
     const counterQuestions = 5;
     const maxQuestions = 4;
     const { history } = this.props;
-    const max = (counter < counterQuestions) && (
-      this.intervalTimer(),
+    const max =
+      counter < counterQuestions &&
+      (this.intervalTimer(),
       this.setState(
         (prevState) => ({
           counter: prevState.counter + 1,
@@ -148,9 +152,8 @@ class Game extends Component {
           } else {
             this.currentQuestion();
           }
-        },
-      )
-    );
+        }
+      ));
     return max;
   };
 
@@ -175,7 +178,7 @@ class Game extends Component {
     let counterWrong = initialCounter;
     const counterAnswersWrong = () => {
       const maxWrongs = 3;
-      const result = (counterWrong < maxWrongs) && (counterWrong += 1);
+      const result = counterWrong < maxWrongs && (counterWrong += 1);
       return result;
     };
     const {
@@ -191,38 +194,52 @@ class Game extends Component {
     return (
       <>
         <Header />
-        <p data-testid="question-category">{category}</p>
-        <p data-testid="question-text">{question}</p>
-        {enableTimer ? <span>{`${timer} segundos`}</span> : <span>Acabou o tempo!</span>}
-        <div data-testid="answer-options">
-          {answers.map((answer, i) => (answer === correct ? (
-            <button
-              disabled={ btnDisabled }
-              className={ colorQuestions ? 'correct' : '' }
-              type="button"
-              data-testid="correct-answer"
-              key={ i }
-              onClick={ this.verifyAnswer }
-            >
-              {answer}
-            </button>
+        <div className="containerBody">
+          <p>{category}</p>
+          <p className="currentQuestion">{he.decode(`${question}`)}</p>
+          {enableTimer ? (
+            <span className="handleSeconds">{`${timer} segundos`}</span>
           ) : (
-            <button
-              className={ colorQuestions ? 'wrong' : '' }
-              type="button"
-              disabled={ btnDisabled }
-              key={ i }
-              data-testid={ `wrong-answer-${counterAnswersWrong()}` }
-              onClick={ this.verifyAnswer }
-            >
-              {answer}
-            </button>
-          )))}
-          {btnNextQuestion && (
-            <button type="button" data-testid="btn-next" onClick={ this.nextQuestion }>
-              Next
-            </button>
+            <span>Acabou o tempo!</span>
           )}
+
+          <div data-testid="answer-options" className="answer-options">
+            {answers.map((answer, i) =>
+              answer === correct ? (
+                <button
+                  disabled={btnDisabled}
+                  className={colorQuestions ? 'btn btn-success' : 'btn btn-secondary'}
+                  type="button"
+                  data-testid="correct-answer"
+                  key={i}
+                  onClick={this.verifyAnswer}
+                >
+                  {he.decode(`${answer}`)}
+                </button>
+              ) : (
+                <button
+                  className={colorQuestions ? 'btn btn-danger' : 'btn btn-secondary'}
+                  type="button"
+                  disabled={btnDisabled}
+                  key={i}
+                  data-testid={`wrong-answer-${counterAnswersWrong()}`}
+                  onClick={this.verifyAnswer}
+                >
+                  {he.decode(`${answer}`)}
+                </button>
+              )
+            )}
+            {btnNextQuestion && (
+              <button
+                type="button"
+                data-testid="btn-next"
+                onClick={this.nextQuestion}
+                className="btn btn-secondary"
+              >
+                Next
+              </button>
+            )}
+          </div>
         </div>
       </>
     );

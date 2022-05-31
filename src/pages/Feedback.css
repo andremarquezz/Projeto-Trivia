@@ -1,0 +1,9 @@
+.containerBody {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-top: 10px;
+}
+

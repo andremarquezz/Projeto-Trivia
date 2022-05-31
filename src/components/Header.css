@@ -1,0 +1,38 @@
+header {
+  display: flex;
+  text-align: center;
+  /* align-items: center; */
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.logoTrivia {
+  width: 350px;
+}
+
+.settings {
+  width: 60px;
+}
+
+.center-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  margin: 30px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  justify-content: space-around;
+}
+
+.userImage {
+  border-radius: 50%;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}

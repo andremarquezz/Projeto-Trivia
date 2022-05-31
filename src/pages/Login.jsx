@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
 import { playerAction } from '../store/actions';
+import './Login.css';
+import trivia from '../images/trivia.png';
 
 class Login extends Component {
   state = {
@@ -38,7 +40,7 @@ class Login extends Component {
       }),
       () => {
         this.validateUserInfo();
-      },
+      }
     );
   };
 
@@ -72,37 +74,45 @@ class Login extends Component {
     const { user, isEnterButtonDisabled } = this.state;
     const { email, name } = user;
     return (
-      <div className="Login">
-        <h3 className="text-center">Login</h3>
-        <section className="login-inputs">
+      <div className="container">
+        <img alt="logoGameTrivia" src={trivia} className="logoTrivia" />
+
+        <section className="container ">
           <input
             data-testid="input-gravatar-email"
             type="email"
             name="email"
-            value={ email }
-            onChange={ this.onInputChange }
+            value={email}
+            onChange={this.onInputChange}
             placeholder="Digite seu E-mail"
+            className="form-control"
           />
           <input
             data-testid="input-player-name"
             type="text"
             name="name"
-            value={ name }
-            onChange={ this.onInputChange }
+            value={name}
+            onChange={this.onInputChange}
             placeholder="Digite seu nome"
+            className="form-control"
           />
         </section>
         <div className="button-login enabled">
           <button
             data-testid="btn-play"
             type="button"
-            disabled={ isEnterButtonDisabled }
-            onClick={ this.handlePlayButton }
+            disabled={isEnterButtonDisabled}
+            onClick={this.handlePlayButton}
+            className="btn btn-primary"
           >
             Play
           </button>
           <Link to="/settings">
-            <button data-testid="btn-settings" type="button">
+            <button
+              data-testid="btn-settings"
+              type="button"
+              className="btn btn-secondary"
+            >
               Settings
             </button>
           </Link>
