@@ -19,7 +19,7 @@
 ### 💻 Sobre o Projeto
 
 <p>Um jogo de perguntas e respostas baseado no jogo Trivia (tipo um show do milhão americano rs) utilizando React e Redux, desenvolvido em grupo suas funcionalidades de acordo com as demandas definidas em um quadro Kanban.</p>
-<p>Criado durante o curso da Trybe com um grupo de 5 alunos, o método Kanban foi aplicado com a ferramenta trello,<a target="_blank" href="#">Gif do Projeto no Trello</a>, as perguntas são trazidas da API de Trivia, com dois endpoints, uma para pegar o token de sessão da pessoa que está jogando e outro para pegar perguntas e respostas, a cada resposta certa é feito um calculo : dificuldade da pergunta * tempo de resposta + 10 = pontos. </p> 
+<p>Criado durante o curso da Trybe com um grupo de 5 alunos, o método Kanban foi aplicado com a ferramenta trello, <a target="_blank" href="src/assets/to_readme/trelloKanban.gif">Gif do Projeto no Trello</a> , as perguntas são trazidas da API de Trivia, com dois endpoints, uma para pegar o token de sessão da pessoa que está jogando e outro para pegar perguntas e respostas, a cada resposta certa é feito um calculo : dificuldade da pergunta * tempo de resposta + 10 = pontos. </p> 
 
 ### 🛠 Tecnologias utilizadas no desenvolvimento do projeto
 -   **[React](https://github.com/facebook/react)**
