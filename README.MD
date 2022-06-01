@@ -20,11 +20,11 @@ https://andremarquezz.github.io/ProjetoTrivia/#/
 ```jsx 
 git@github.com:andremarquezz/ProjetoTrivia.git
 ```
-*2- Executar no terminal dentro da pasta do projeto* 
+*2- Executar o comando abaixo no terminal, dentro da pasta do projeto.* 
 ```jsx 
 npm install
 ```
-*3- Executar no terminal dentro da pasta do projeto* 
+*3- Executar o comando abaixo no terminal, dentro da pasta do projeto.* 
 ```jsx 
 npm start
 ```
