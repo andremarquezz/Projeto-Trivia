@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/ProjetoTrivia/static/css/main.a07c7b2b.chunk.css",
-    "main.js": "/ProjetoTrivia/static/js/main.bfc448c9.chunk.js",
-    "main.js.map": "/ProjetoTrivia/static/js/main.bfc448c9.chunk.js.map",
+    "main.js": "/ProjetoTrivia/static/js/main.f1ccebc9.chunk.js",
+    "main.js.map": "/ProjetoTrivia/static/js/main.f1ccebc9.chunk.js.map",
     "runtime-main.js": "/ProjetoTrivia/static/js/runtime-main.ba7b48fe.js",
     "runtime-main.js.map": "/ProjetoTrivia/static/js/runtime-main.ba7b48fe.js.map",
-    "static/js/2.6e8e7988.chunk.js": "/ProjetoTrivia/static/js/2.6e8e7988.chunk.js",
-    "static/js/2.6e8e7988.chunk.js.map": "/ProjetoTrivia/static/js/2.6e8e7988.chunk.js.map",
+    "static/js/2.d04fd249.chunk.js": "/ProjetoTrivia/static/js/2.d04fd249.chunk.js",
+    "static/js/2.d04fd249.chunk.js.map": "/ProjetoTrivia/static/js/2.d04fd249.chunk.js.map",
     "index.html": "/ProjetoTrivia/index.html",
-    "precache-manifest.06e3a57a7cdaac30668a511216c1b1ef.js": "/ProjetoTrivia/precache-manifest.06e3a57a7cdaac30668a511216c1b1ef.js",
+    "precache-manifest.8f79da371f298cfc0385f9fc82fc2fcf.js": "/ProjetoTrivia/precache-manifest.8f79da371f298cfc0385f9fc82fc2fcf.js",
     "service-worker.js": "/ProjetoTrivia/service-worker.js",
     "static/css/main.a07c7b2b.chunk.css.map": "/ProjetoTrivia/static/css/main.a07c7b2b.chunk.css.map",
-    "static/js/2.6e8e7988.chunk.js.LICENSE.txt": "/ProjetoTrivia/static/js/2.6e8e7988.chunk.js.LICENSE.txt",
+    "static/js/2.d04fd249.chunk.js.LICENSE.txt": "/ProjetoTrivia/static/js/2.d04fd249.chunk.js.LICENSE.txt",
     "static/media/audio_background_game.mp3": "/ProjetoTrivia/static/media/audio_background_game.5a597645.mp3",
     "static/media/settings.png": "/ProjetoTrivia/static/media/settings.9272e1c5.png",
     "static/media/trivia.png": "/ProjetoTrivia/static/media/trivia.466d153e.png"
   },
   "entrypoints": [
     "static/js/runtime-main.ba7b48fe.js",
-    "static/js/2.6e8e7988.chunk.js",
+    "static/js/2.d04fd249.chunk.js",
     "static/css/main.a07c7b2b.chunk.css",
-    "static/js/main.bfc448c9.chunk.js"
+    "static/js/main.f1ccebc9.chunk.js"
   ]
 }
