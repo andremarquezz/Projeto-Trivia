@@ -7,8 +7,13 @@
  </p>
 
 # Sumário
-• <a href="#-sobre-o-projeto">Sobre o Projeto</a> 
-<!--  <a href="#-sobre-o-projeto">Sobre o Projeto</a> • -->
+• [Sobre o Projeto](#-sobre-o-projeto)
+
+• [Tecnologias utilizadas no desenvolvimento do projeto](#-tecnologias-utilizadas-no-desenvolvimento-do-projeto)
+- [Como executar o projeto](#-como-executar-o-projeto)
+  -  [Remotamente](#remotamente)
+  -  [Localmente](#localmente)
+- [Contribuidores](#-contribuidores)
 
 
 ### 💻 Sobre o Projeto
