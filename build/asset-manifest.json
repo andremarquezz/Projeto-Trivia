@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/app-toot-name/static/css/main.a07c7b2b.chunk.css",
+    "main.js": "/app-toot-name/static/js/main.f0f5c2fb.chunk.js",
+    "main.js.map": "/app-toot-name/static/js/main.f0f5c2fb.chunk.js.map",
+    "runtime-main.js": "/app-toot-name/static/js/runtime-main.64cdd275.js",
+    "runtime-main.js.map": "/app-toot-name/static/js/runtime-main.64cdd275.js.map",
+    "static/js/2.6e8e7988.chunk.js": "/app-toot-name/static/js/2.6e8e7988.chunk.js",
+    "static/js/2.6e8e7988.chunk.js.map": "/app-toot-name/static/js/2.6e8e7988.chunk.js.map",
+    "index.html": "/app-toot-name/index.html",
+    "precache-manifest.52241a2be1dd9be2443071a39872c3d7.js": "/app-toot-name/precache-manifest.52241a2be1dd9be2443071a39872c3d7.js",
+    "service-worker.js": "/app-toot-name/service-worker.js",
+    "static/css/main.a07c7b2b.chunk.css.map": "/app-toot-name/static/css/main.a07c7b2b.chunk.css.map",
+    "static/js/2.6e8e7988.chunk.js.LICENSE.txt": "/app-toot-name/static/js/2.6e8e7988.chunk.js.LICENSE.txt",
+    "static/media/audio_background_game.mp3": "/app-toot-name/static/media/audio_background_game.5a597645.mp3",
+    "static/media/settings.png": "/app-toot-name/static/media/settings.9272e1c5.png",
+    "static/media/trivia.png": "/app-toot-name/static/media/trivia.466d153e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.64cdd275.js",
+    "static/js/2.6e8e7988.chunk.js",
+    "static/css/main.a07c7b2b.chunk.css",
+    "static/js/main.f0f5c2fb.chunk.js"
+  ]
+}
