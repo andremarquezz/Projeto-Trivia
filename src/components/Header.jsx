@@ -17,11 +17,11 @@ class Header extends Component {
             src={userInfo.picture}
             alt="imageGravatar"
             data-testid="header-profile-picture"
-            className='userImage'
+            className="userImage"
           />
           <img alt="logoGameTrivia" src={trivia} className="logoTrivia" />
           <Link to="/settings">
-            <img className="settings" src={settings} />
+            <img className="settings" src={settings} alt="logoSettings" />
           </Link>
         </div>
         <div className="userInfo">

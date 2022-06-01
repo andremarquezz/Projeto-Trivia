@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Ranking.css';
-import Header from '../components/Header';
+// import audioBackground from '../audios/audio_background_credits.mp3';
 
 class Ranking extends Component {
   state = {
@@ -11,6 +11,10 @@ class Ranking extends Component {
 
   componentDidMount() {
     this.handleRanking();
+    // const audio = new Audio(audioBackground);
+    // audio.volume = 0.2;
+    // audio.loop = true;
+    // audio.play();
   }
 
   handleRanking = () => {

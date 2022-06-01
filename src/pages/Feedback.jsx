@@ -29,7 +29,7 @@ class Feedback extends Component {
             Play Again
           </button>
           <button
-            className="btn btn-info"
+            className="btn btn-primary"
             type="button"
             onClick={() => history.push('/ranking')}
           >

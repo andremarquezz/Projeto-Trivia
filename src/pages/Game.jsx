@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import './Game.css';
+import audioBackground from '../audios/audio_background_game.mp3';
 import { scoreAction, assertionsAction } from '../store/actions';
 import he from 'he';
 
@@ -24,6 +25,7 @@ class Game extends Component {
   componentDidMount() {
     this.fetchQuestions();
     this.intervalTimer();
+    this.backgroundAudio('play');
   }
 
   componentDidUpdate() {
@@ -34,6 +36,19 @@ class Game extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.backgroundAudio('pause');
+  }
+
+  backgroundAudio = (audioControl) => {
+    const audio = new Audio(audioBackground);
+    audio.volume = 0.2;
+    audio.loop = true;
+    if (audioControl === 'play') audio.play();
+    // if (audioControl === 'pause') {
+    //   console.log('entrei');
+    // }
+  };
   intervalTimer = () => {
     const ONE_SECOND = 1000;
     this.timer = setInterval(() => {
