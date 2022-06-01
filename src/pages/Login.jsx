@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
 import { playerAction } from '../store/actions';
 import './Login.css';
-import trivia from '../images/trivia.png';
+import trivia from '../assets/images/trivia.png';
 
 class Login extends Component {
   state = {

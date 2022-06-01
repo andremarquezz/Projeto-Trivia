@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import trivia from '../images/trivia.png';
-import settings from '../images/settings.png';
+import trivia from '../assets/images/trivia.png';
+import settings from '../assets/images/settings.png';
 import './Header.css';
 
 class Header extends Component {
