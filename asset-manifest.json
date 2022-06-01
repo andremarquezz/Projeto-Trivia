@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Trivia/static/css/main.a07c7b2b.chunk.css",
+    "main.js": "/Trivia/static/js/main.bfc448c9.chunk.js",
+    "main.js.map": "/Trivia/static/js/main.bfc448c9.chunk.js.map",
+    "runtime-main.js": "/Trivia/static/js/runtime-main.47c47432.js",
+    "runtime-main.js.map": "/Trivia/static/js/runtime-main.47c47432.js.map",
+    "static/js/2.6e8e7988.chunk.js": "/Trivia/static/js/2.6e8e7988.chunk.js",
+    "static/js/2.6e8e7988.chunk.js.map": "/Trivia/static/js/2.6e8e7988.chunk.js.map",
+    "index.html": "/Trivia/index.html",
+    "precache-manifest.53ecbc146ff3d6e46e85931900374f2e.js": "/Trivia/precache-manifest.53ecbc146ff3d6e46e85931900374f2e.js",
+    "service-worker.js": "/Trivia/service-worker.js",
+    "static/css/main.a07c7b2b.chunk.css.map": "/Trivia/static/css/main.a07c7b2b.chunk.css.map",
+    "static/js/2.6e8e7988.chunk.js.LICENSE.txt": "/Trivia/static/js/2.6e8e7988.chunk.js.LICENSE.txt",
+    "static/media/audio_background_game.mp3": "/Trivia/static/media/audio_background_game.5a597645.mp3",
+    "static/media/settings.png": "/Trivia/static/media/settings.9272e1c5.png",
+    "static/media/trivia.png": "/Trivia/static/media/trivia.466d153e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.47c47432.js",
+    "static/js/2.6e8e7988.chunk.js",
+    "static/css/main.a07c7b2b.chunk.css",
+    "static/js/main.bfc448c9.chunk.js"
+  ]
+}
