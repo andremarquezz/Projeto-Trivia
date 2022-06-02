@@ -55,6 +55,10 @@ npm install
 ```jsx 
 npm start
 ```
+*A aplicação contém testes, para executar basta digitar o comando abaixo no terminal, dentro da pasta do projeto.* 
+```jsx 
+npm test
+```
 
 # 👨‍💻 Contribuidores
 
