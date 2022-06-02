@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import './Game.css';
-import audioBackground from '../assets/audios/audio_background_game.mp3';
+import audioBackground from '../assets/audios/background_game.mp3';
 import { scoreAction, assertionsAction } from '../store/actions';
 import he from 'he';
 

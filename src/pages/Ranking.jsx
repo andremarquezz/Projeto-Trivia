@@ -2,19 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Ranking.css';
-// import audioBackground from '../audios/audio_background_credits.mp3';
+import audioBackground from '../assets/audios/background_ranking.mp3';
 
 class Ranking extends Component {
   state = {
     players: JSON.parse(localStorage.getItem('ranking')) || [],
   };
 
+  audio = 0;
+
   componentDidMount() {
-    this.handleRanking();
-    // const audio = new Audio(audioBackground);
-    // audio.volume = 0.2;
-    // audio.loop = true;
-    // audio.play();
+    this.audio = new Audio(audioBackground);
+    this.audio.volume = 0.1;
+    this.audio.play();
+  }
+  componentWillUnmount() {
+    this.audio.pause();
   }
 
   handleRanking = () => {
