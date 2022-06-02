@@ -8,6 +8,7 @@ import { scoreAction, assertionsAction } from '../store/actions';
 import he from 'he';
 
 class Game extends Component {
+  audio = 0;
   state = {
     results: [],
     currentQuestion: {},
@@ -25,9 +26,13 @@ class Game extends Component {
   componentDidMount() {
     this.fetchQuestions();
     this.intervalTimer();
-    const audio = new Audio(audioBackground);
-    audio.volume = 0.2;
-    audio.play();
+    this.audio = new Audio(audioBackground);
+    this.audio.volume = 0.2;
+    this.audio.play();
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    this.audio.pause();
   }
 
   componentDidUpdate() {
@@ -38,18 +43,13 @@ class Game extends Component {
     }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
-    // audio.stop();
-  }
-
   // backgroundAudio = (audioControl) => {
   //   if (audioControl === 'play') audio.play();
   //   if (audioControl === 'pause') {
   //     console.log('entrei');
   //   }
   // };
-  
+
   intervalTimer = () => {
     const ONE_SECOND = 1000;
     this.timer = setInterval(() => {
