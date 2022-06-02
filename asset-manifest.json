@@ -1,25 +1,26 @@
 {
   "files": {
     "main.css": "/ProjetoTrivia/static/css/main.a07c7b2b.chunk.css",
-    "main.js": "/ProjetoTrivia/static/js/main.931e91a9.chunk.js",
-    "main.js.map": "/ProjetoTrivia/static/js/main.931e91a9.chunk.js.map",
+    "main.js": "/ProjetoTrivia/static/js/main.3dfbc696.chunk.js",
+    "main.js.map": "/ProjetoTrivia/static/js/main.3dfbc696.chunk.js.map",
     "runtime-main.js": "/ProjetoTrivia/static/js/runtime-main.ba7b48fe.js",
     "runtime-main.js.map": "/ProjetoTrivia/static/js/runtime-main.ba7b48fe.js.map",
-    "static/js/2.d04fd249.chunk.js": "/ProjetoTrivia/static/js/2.d04fd249.chunk.js",
-    "static/js/2.d04fd249.chunk.js.map": "/ProjetoTrivia/static/js/2.d04fd249.chunk.js.map",
+    "static/js/2.46af664a.chunk.js": "/ProjetoTrivia/static/js/2.46af664a.chunk.js",
+    "static/js/2.46af664a.chunk.js.map": "/ProjetoTrivia/static/js/2.46af664a.chunk.js.map",
     "index.html": "/ProjetoTrivia/index.html",
-    "precache-manifest.367469a5e97ead129ad32acbc4422c56.js": "/ProjetoTrivia/precache-manifest.367469a5e97ead129ad32acbc4422c56.js",
+    "precache-manifest.2befcb133c1b86015de24f8ec6c25200.js": "/ProjetoTrivia/precache-manifest.2befcb133c1b86015de24f8ec6c25200.js",
     "service-worker.js": "/ProjetoTrivia/service-worker.js",
     "static/css/main.a07c7b2b.chunk.css.map": "/ProjetoTrivia/static/css/main.a07c7b2b.chunk.css.map",
-    "static/js/2.d04fd249.chunk.js.LICENSE.txt": "/ProjetoTrivia/static/js/2.d04fd249.chunk.js.LICENSE.txt",
-    "static/media/audio_background_game.mp3": "/ProjetoTrivia/static/media/audio_background_game.5a597645.mp3",
+    "static/js/2.46af664a.chunk.js.LICENSE.txt": "/ProjetoTrivia/static/js/2.46af664a.chunk.js.LICENSE.txt",
+    "static/media/background_game.mp3": "/ProjetoTrivia/static/media/background_game.4d72a304.mp3",
+    "static/media/background_ranking.mp3": "/ProjetoTrivia/static/media/background_ranking.a804b806.mp3",
     "static/media/settings.png": "/ProjetoTrivia/static/media/settings.9272e1c5.png",
     "static/media/trivia.png": "/ProjetoTrivia/static/media/trivia.466d153e.png"
   },
   "entrypoints": [
     "static/js/runtime-main.ba7b48fe.js",
-    "static/js/2.d04fd249.chunk.js",
+    "static/js/2.46af664a.chunk.js",
     "static/css/main.a07c7b2b.chunk.css",
-    "static/js/main.931e91a9.chunk.js"
+    "static/js/main.3dfbc696.chunk.js"
   ]
 }
