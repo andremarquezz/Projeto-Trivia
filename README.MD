@@ -3,7 +3,7 @@
 <h1 align="center">Jogo de Trivia</h1>
 <p align="center">Jogo de Trivia é um jogo de perguntas e respostas</p>
 <p align="center"> 
-  <img width="470" src="src/assets/to_readme/triviaGif.gif">
+  <img src="src/assets/to_readme/triviaGif.gif">
  </p>
 
 # Sumário
