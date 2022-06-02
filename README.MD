@@ -74,3 +74,8 @@ npm test
 # 👨‍💻 Contribuidores
 
 💜 Um super obrigado para esse grupo que em união fizemos esse projeto sair do campo da ideia.
+
+*Iasmin Gabrig
+*Welyson Rosa
+*Sarah Reis
+*Paulo Medeiros
