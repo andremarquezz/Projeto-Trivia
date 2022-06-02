@@ -2,9 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import audioBackground from '../assets/audios/audio_background_credits.mp3';
+
 import './Feedback.css';
 
 class Feedback extends Component {
+  audio = 0;
+
+  componentDidMount() {
+    this.audio = new Audio(audioBackground);
+    this.audio.volume = 0.1;
+    this.audio.play();
+  }
+  componentWillUnmount() {
+    this.audio.pause();
+  }
+
   handleFeedback = () => {
     const { assertions } = this.props;
     const threeAssertions = 3;

@@ -27,7 +27,7 @@ class Game extends Component {
     this.fetchQuestions();
     this.intervalTimer();
     this.audio = new Audio(audioBackground);
-    this.audio.volume = 0.2;
+    this.audio.volume = 0.1;
     this.audio.play();
   }
   componentWillUnmount() {
