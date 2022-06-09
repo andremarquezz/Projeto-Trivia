@@ -75,4 +75,4 @@ npm test
 
 💜 Um super obrigado para esse grupo que em união fizemos esse projeto sair do campo da ideia.
 
-*Iasmin Gabrig*, *Welyson Rosa*, *Sarah Reis* e *Paulo Medeiros - 404*.
+*Iasmin Gabrig*, *Welyson Rosa*, *Sarah Reis* e *Paulo Medeiros*.
