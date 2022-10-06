@@ -2,7 +2,6 @@
   "name": "trivia-react-redux",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://andremarquezz.github.io/ProjetoTrivia/",
   "engines": {
     "node": "16"
   },
